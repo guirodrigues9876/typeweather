@@ -4,8 +4,38 @@ import { api } from "./api";
 import { getNextDays } from "../utils/getNextDays";
 import { weatherIcons } from "../utils/weatherIcons";
 
-export async function getWeatherByCity({ latitude, longitude }) {
-  const { data } = await api.get(`/forecast?lat=${latitude}&lon=${longitude}`);
+interface GetWeatherByCityProps {
+  latitude: number;
+  longitude: number;
+}
+
+type WeatherIconKeysProps = 'Clouds' | 'Rain' | 'Clear' | 'Snow';
+
+export interface WeatherAPIResponseProps {
+  list: {
+    dt_txt: string;
+    pop: number;
+    main: {
+      temp: number;
+      temp_min: number;
+      temp_max: number;
+      feels_like: number;
+      humidity: number;
+      temp_kf: number;
+    },
+    wind: {
+      speed: number;
+    },
+    weather: {
+      main: WeatherIconKeysProps;
+      description: string;
+    }[];
+  }[];
+}
+
+export async function getWeatherByCity({ latitude, longitude }: GetWeatherByCityProps) {
+  const { data } = await api.get<WeatherAPIResponseProps>(`/forecast?lat=${latitude}&lon=${longitude}`);
+  
   const { main, weather, wind, pop } = data.list[0];
 
   console.log(weather)
