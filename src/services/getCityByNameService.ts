@@ -30,7 +30,7 @@ export async function getCityByNameService(name: string): Promise<CityProps[]> {
       latitude: data.coord.lat,
     };
 
-    return city;
+    return [city];
   } catch (error) {
     return [ ];
   }
