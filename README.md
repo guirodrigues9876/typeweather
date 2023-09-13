@@ -5,5 +5,5 @@
 <p align="center">Developed at extra module of the Explorer Course</p>
 
 <p align="center">
-  <img alt="typeweather" src="./src/assets/cover.jpg" width="100%">
+  <img alt="typeweather" src="./src/assets/img/cover.jpg" width="100%">
 </p>
